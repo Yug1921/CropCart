@@ -18,8 +18,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "15mb" }));
+app.use(express.urlencoded({ extended: true, limit: "15mb" }));
 
 // Connect to MongoDB
 connectDB();
@@ -34,6 +34,19 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/categories", categoryRoutes);
+
+// Handle oversized payloads with a clear API response
+app.use((err, req, res, next) => {
+  if (err?.type === "entity.too.large") {
+    return res.status(413).json({
+      success: false,
+      message:
+        "Request payload is too large. Please upload smaller images or fewer images.",
+    });
+  }
+
+  next(err);
+});
 
 // Start server
 app.listen(PORT, () => {

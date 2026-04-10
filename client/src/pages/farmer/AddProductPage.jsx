@@ -38,6 +38,14 @@ const AddProductPage = () => {
   const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
   const [errors, setErrors] = useState({});
 
+  const readFileAsDataUrl = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error("Failed to read image file"));
+      reader.readAsDataURL(file);
+    });
+
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -57,15 +65,27 @@ const AddProductPage = () => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    const newImagePreviewUrls = files.map((file) => URL.createObjectURL(file));
+  const handleImageChange = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
 
-    setImagePreviewUrls([...imagePreviewUrls, ...newImagePreviewUrls]);
-    setFormData({
-      ...formData,
-      images: [...formData.images, ...newImagePreviewUrls],
-    });
+    try {
+      const newImageDataUrls = await Promise.all(
+        files.map((file) => readFileAsDataUrl(file))
+      );
+
+      setImagePreviewUrls((prev) => [...prev, ...newImageDataUrls]);
+      setFormData((prev) => ({
+        ...prev,
+        images: [...prev.images, ...newImageDataUrls],
+      }));
+      e.target.value = "";
+    } catch {
+      setErrors((prev) => ({
+        ...prev,
+        images: "Unable to process one or more images. Please try again.",
+      }));
+    }
   };
 
   const removeImage = (index) => {
@@ -416,6 +436,9 @@ const AddProductPage = () => {
                 Upload up to 5 images
               </span>
             </div>
+            {errors.images && (
+              <p className="text-red-500 text-xs mt-2">{errors.images}</p>
+            )}
 
             {imagePreviewUrls.length > 0 && (
               <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">

@@ -141,7 +141,7 @@ const ProductDetailPage = () => {
           <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 h-80">
             {product.images && product.images.length > 0 ? (
               <img
-                src={product.images[activeImage]}
+                src={product.images[activeImage] || placeholder}
                 alt={product.name}
                 onError={handleImageError}
                 className="w-full h-full object-cover"
@@ -170,6 +170,7 @@ const ProductDetailPage = () => {
                   <img
                     src={image || placeholder}
                     alt={`${product.name} - ${index + 1}`}
+                    onError={handleImageError}
                     className="w-full h-full object-cover"
                   />
                 </div>
