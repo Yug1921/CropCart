@@ -2,7 +2,7 @@
 
 **CropCart** is a full-stack web application designed to bridge the gap between farmers and consumers. It enables farmers to showcase produce, connect with buyers, and build trust on one digital platform.
 
-## 💡 Challenge (Given Scenario)
+## 💡 Challenge
 
 **Build a full-stack web application that connects farmers and consumers.**
 
