@@ -2,10 +2,6 @@
 
 **CropCart** is a full-stack web application designed to bridge the gap between farmers and consumers. It enables farmers to showcase produce, connect with buyers, and build trust on one digital platform.
 
-🚀 **Winner of the Full Stack Web Development Hackathon** at the University of South Asia — built by Team Terminator 🏆
-
----
-
 ## 💡 Challenge (Given Scenario)
 
 **Build a full-stack web application that connects farmers and consumers.**
@@ -190,4 +186,4 @@ For any questions, feedback, or collaboration opportunities, add your contact de
 
 ---
 
-> Built by the CropCart team.
+
