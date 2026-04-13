@@ -29,16 +29,10 @@ const teamMembers = [
   },
   {
     id: 4,
-    name: "Rudra Solanki",
+    name: "Om Solanki",
     role: "Backend Engineering",
-    linkedin: "https://www.linkedin.com/in/rudra-solanki-b95812376/",
-  },
-  {
-    id: 5,
-    name: "Akshat Modiya",
-    role: "Operations & QA",
-    linkedin: "https://www.linkedin.com/in/akshat-modhiya-900a11376/",
-  },
+    linkedin: "https://www.linkedin.com/in/om-solanki-8bb903376/",
+  }
 ];
 
 const AboutPage = () => {
