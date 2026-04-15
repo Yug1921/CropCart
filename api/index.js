@@ -26,7 +26,7 @@ connectDB();
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("KisanBazar API is running");
+  res.send("Crop Cart is running");
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
