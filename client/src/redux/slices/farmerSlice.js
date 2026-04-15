@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { toast } from "react-toastify"
-
-const API_URL = import.meta.env.VITE_API_URL
+import API_URL from "../../utils/apiBaseUrl"
 
 // Get all farmers
 export const getAllFarmers = createAsyncThunk("farmers/getAllFarmers", async (_, { rejectWithValue }) => {
